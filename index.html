@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FastDL.Space - Instagram Downloader | Download Videos & Photos in Batch</title>
-    <meta name="description" content="Instagram Downloader Tool - Easily download Instagram videos, Reels, stories, photos, audio, and more. Supports batch download, HD MP4, no login required.">
+    <meta name="description" content="Fast Download - Instagram视频、照片、Reels、Stories快速下载工具">
     <meta name="keywords" content="Instagram Downloader, Instagram Video Download, Instagram Reels Download, Instagram Story Download, Instagram Photo Download, Instagram Audio Download, Instagram Private Content Download">
+    <title>Fast Download - Instagram视频下载工具</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
                 <a href="/">
-                    <h1>FastDL.Space</h1>
-                    <p>Instagram Downloader</p>
+                    <img src="img/logo.png" alt="Fast Download Logo">
+                    <span>FastDL.space</span>
                 </a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#video">Video Download</a></li>
-                    <li><a href="#reels">Reels Download</a></li>
-                    <li><a href="#story">Story Download</a></li>
-                    <li><a href="#photo">Photo Download</a></li>
-                    <li><a href="#audio">Audio Download</a></li>
-                    <li><a href="#private">Private Content</a></li>
+                    <li><a href="#video">视频下载</a></li>
+                    <li><a href="#reels">Reels下载</a></li>
+                    <li><a href="#story">Stories下载</a></li>
+                    <li><a href="#photo">照片下载</a></li>
+                    <li><a href="#audio">音频下载</a></li>
+                    <li><a href="#private">私密内容</a></li>
                 </ul>
             </nav>
-            <div class="language-selector">
-                <button id="language-toggle" data-target-lang="zh"><i class="fas fa-globe"></i> <span>English</span></button>
-                <div class="language-dropdown">
-                    <a href="#" data-lang="zh">🇨🇳 中文</a>
-                    <a href="#" data-lang="en">🇺🇸 English</a>
-                </div>
+            <div class="language-switch">
+                <select id="language-selector">
+                    <option value="zh">🇨🇳 中文</option>
+                    <option value="en">🇺🇸 English</option>
+                </select>
             </div>
         </div>
     </header>
@@ -41,208 +40,150 @@
     <main>
         <section class="hero">
             <div class="container">
-                <h1 class="main-title">Instagram Video/Photo/Reels/Story Downloader</h1>
-                <p class="subtitle">No login required, one-click batch download, supporting HD videos, photos, Reels, stories, etc.</p>
+                <h1>Instagram 下载工具</h1>
+                <p>下载Instagram视频、照片、Reels、Stories、音频 - 快速、免费、无水印</p>
+                
+                <div class="batch-input">
+                    <textarea id="batch-links" placeholder="粘贴多个Instagram链接，每行一个..."></textarea>
+                    <div class="button-group">
+                        <button id="clear-links" class="secondary-btn">清空</button>
+                        <button id="download-all" class="primary-btn">批量下载</button>
+                    </div>
+                </div>
                 
                 <div class="download-box">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-tab="all">All Content</button>
-                        <button class="tab-btn" data-tab="video">Video</button>
-                        <button class="tab-btn" data-tab="reels">Reels</button>
-                        <button class="tab-btn" data-tab="story">Story</button>
-                        <button class="tab-btn" data-tab="photo">Photo</button>
-                        <button class="tab-btn" data-tab="audio">Audio</button>
-                    </div>
-                    
-                    <div class="input-area">
-                        <textarea id="instagram-urls" placeholder="Paste Instagram links here, one per line, supports batch adding..."></textarea>
-                        <div class="action-buttons">
-                            <button id="paste-button"><i class="fas fa-paste"></i> Paste</button>
-                            <button id="clear-button"><i class="fas fa-trash"></i> Clear</button>
-                        </div>
-                    </div>
-                    
-                    <div class="download-options">
-                        <div class="quality-selector">
-                            <label>Video Quality:</label>
-                            <select id="quality-select">
-                                <option value="highest">Highest Quality</option>
-                                <option value="hd">HD Quality</option>
-                                <option value="sd">SD Quality</option>
-                            </select>
-                        </div>
-                        <div class="format-selector">
-                            <label>Download Format:</label>
-                            <select id="format-select">
-                                <option value="original">Original Format</option>
-                                <option value="mp4">MP4</option>
-                                <option value="mp3">MP3 (Audio Only)</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <button id="download-button" class="primary-button">
-                        <i class="fas fa-download"></i> Start Download
-                    </button>
+                    <input type="text" id="instagram-link" placeholder="粘贴Instagram链接...">
+                    <button id="download-btn">下载</button>
                 </div>
             </div>
         </section>
 
-        <section class="results" id="results">
+        <section id="features" class="features">
             <div class="container">
-                <h2>Download Results</h2>
-                <div class="progress-container" style="display: none;">
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                    <div class="progress-text">Processing... <span class="progress-percentage">0%</span></div>
-                </div>
-                <div class="results-list">
-                    <!-- Results will be dynamically added here -->
-                </div>
-                <div class="batch-actions" style="display: none;">
-                    <button id="download-all" class="secondary-button">
-                        <i class="fas fa-download"></i> Download All
-                    </button>
-                    <button id="copy-all-links" class="secondary-button">
-                        <i class="fas fa-copy"></i> Copy All Links
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <section class="features">
-            <div class="container">
-                <h2>FastDL.Space Features</h2>
+                <h2>主要功能</h2>
                 <div class="feature-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-bolt"></i>
-                        <h3>Fast Batch Download</h3>
-                        <p>Add multiple links at once and batch download Instagram content</p>
+                    <div class="feature-card" id="video">
+                        <div class="feature-icon"><i class="fas fa-video"></i></div>
+                        <h3>Instagram视频下载</h3>
+                        <p>支持MP4格式、HD高清、4K超清视频下载</p>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-lock"></i>
-                        <h3>No Login Required</h3>
-                        <p>No need to provide Instagram account credentials, protecting your privacy</p>
+                    <div class="feature-card" id="reels">
+                        <div class="feature-icon"><i class="fas fa-film"></i></div>
+                        <h3>Instagram Reels下载</h3>
+                        <p>下载短视频、Reels至本地相册</p>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-video"></i>
-                        <h3>HD Video Download</h3>
-                        <p>Support for 4K, HD high-definition video downloads, crystal clear quality</p>
+                    <div class="feature-card" id="story">
+                        <div class="feature-icon"><i class="fas fa-history"></i></div>
+                        <h3>Instagram Story下载</h3>
+                        <p>保存故事视频和图片，永久保存珍贵瞬间</p>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h3>Mobile-Friendly</h3>
-                        <p>Easily download Instagram content on your phone or tablet</p>
+                    <div class="feature-card" id="photo">
+                        <div class="feature-icon"><i class="fas fa-image"></i></div>
+                        <h3>Instagram照片下载</h3>
+                        <p>下载高清无损照片，保存美好回忆</p>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-music"></i>
-                        <h3>Extract Audio</h3>
-                        <p>Extract MP3 audio from Instagram videos</p>
+                    <div class="feature-card" id="audio">
+                        <div class="feature-icon"><i class="fas fa-music"></i></div>
+                        <h3>Instagram音频下载</h3>
+                        <p>提取视频中的MP3音频，保存喜爱的音乐</p>
                     </div>
-                    <div class="feature-card">
-                        <i class="fas fa-history"></i>
-                        <h3>No Download Limits</h3>
-                        <p>Completely free, no download restrictions</p>
+                    <div class="feature-card" id="private">
+                        <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                        <h3>私密内容下载</h3>
+                        <p>支持下载自己账号的私密内容</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="how-to-use">
+        <section id="how-to-use" class="how-to-use">
             <div class="container">
-                <h2>How to Use FastDL.Space</h2>
+                <h2>如何使用</h2>
                 <div class="steps">
                     <div class="step">
                         <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3>Copy Instagram Link</h3>
-                            <p>Click "..." in the Instagram app on a post, and select "Copy Link"</p>
-                            <div class="step-image">
-                                <img src="img/step1.png" alt="Copy Instagram Link">
-                            </div>
-                        </div>
+                        <h3>复制链接</h3>
+                        <p>在Instagram应用或网页上，点击分享按钮并复制链接</p>
+                        <img src="img/step1.png" alt="步骤1：复制链接">
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3>Paste Links</h3>
-                            <p>Paste the copied link into the text box above, supports adding multiple links</p>
-                            <div class="step-image">
-                                <img src="img/step2.png" alt="Paste Links">
-                            </div>
-                        </div>
+                        <h3>粘贴链接</h3>
+                        <p>将复制的链接粘贴到我们的下载框中</p>
+                        <img src="img/step2.png" alt="步骤2：粘贴链接">
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3>Start Download</h3>
-                            <p>Click the "Start Download" button and wait for processing to complete before downloading your content</p>
-                            <div class="step-image">
-                                <img src="img/step3.png" alt="Start Download">
-                            </div>
-                        </div>
+                        <h3>下载内容</h3>
+                        <p>点击"下载"按钮，选择保存位置即可</p>
+                        <img src="img/step3.png" alt="步骤3：下载内容">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="faq">
+        <section id="batch-download" class="batch-download">
             <div class="container">
-                <h2>Frequently Asked Questions</h2>
+                <h2>批量下载</h2>
+                <p>一次性下载多个Instagram内容，提高效率</p>
+                <div class="batch-demo">
+                    <img src="img/batch-download.png" alt="批量下载演示">
+                </div>
+                <div class="batch-features">
+                    <div class="batch-feature">
+                        <i class="fas fa-bolt"></i>
+                        <p>快速处理多个链接</p>
+                    </div>
+                    <div class="batch-feature">
+                        <i class="fas fa-folder"></i>
+                        <p>自动分类保存</p>
+                    </div>
+                    <div class="batch-feature">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <p>一键打包下载</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2>常见问题</h2>
                 <div class="accordion">
                     <div class="accordion-item">
-                        <button class="accordion-header">
-                            What is an Instagram Downloader?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
+                        <div class="accordion-header">什么是Instagram下载工具？</div>
                         <div class="accordion-content">
-                            <p>An Instagram downloader is an online tool that allows you to download photos, videos, Reels, and stories from Instagram. FastDL.Space is one of the best tools for downloading Instagram content.</p>
+                            <p>Instagram下载工具是一种在线服务，允许您下载Instagram上的视频、照片、Reels、Stories和IGTV内容。FastDL.space是最好的Instagram内容下载工具之一。</p>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <button class="accordion-header">
-                            Do I need to log in with my Instagram account?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
+                        <div class="accordion-header">需要登录Instagram账号吗？</div>
                         <div class="accordion-content">
-                            <p>No. FastDL.Space does not require you to log in to your Instagram account, ensuring you can download content safely and anonymously.</p>
+                            <p>不需要，您无需登录Instagram账号。FastDL.space不要求您提供任何个人信息，确保您可以安全匿名地下载内容。</p>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <button class="accordion-header">
-                            Is this Instagram video and photo download service free?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
+                        <div class="accordion-header">这项服务收费吗？</div>
                         <div class="accordion-content">
-                            <p>Yes, this service is completely free and has no download limits.</p>
+                            <p>不，这项服务完全免费，没有下载限制。</p>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <button class="accordion-header">
-                            Can I download content from a private Instagram account?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
+                        <div class="accordion-header">可以下载私密账号的内容吗？</div>
                         <div class="accordion-content">
-                            <p>Generally, you cannot download videos, stories, or photos from private Instagram accounts. However, FastDL.Space offers special private content download functionality that requires additional verification information.</p>
+                            <p>您只能下载自己私密账号的内容，无法下载其他私密账号的视频、故事或照片。</p>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <button class="accordion-header">
-                            Can I download Instagram stories?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
+                        <div class="accordion-header">支持下载Instagram Stories吗？</div>
                         <div class="accordion-content">
-                            <p>Yes, you can view and download Instagram stories. Simply click "⋯" on the story, select "Copy Link", and paste the link into FastDL.Space to download it.</p>
+                            <p>是的，您可以查看并下载自己的Instagram Story。点击Story上的⁝，选择"复制链接"，然后将链接粘贴到FastDL.space进行下载。</p>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <button class="accordion-header">
-                            Where are downloaded videos saved?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
+                        <div class="accordion-header">下载的内容保存在哪里？</div>
                         <div class="accordion-content">
-                            <p>Typically, videos are saved in the "Downloads" folder on Android devices and PCs, and in the "Files" app or photo library on iOS devices.</p>
+                            <p>通常，视频和照片会保存在Android设备和PC的"下载"文件夹中。在iOS设备上，内容会保存到您的照片库中。</p>
                         </div>
                     </div>
                 </div>
@@ -252,46 +193,51 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h2>FastDL.Space</h2>
-                    <p>Instagram Content Downloader</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Fast Download</h3>
+                    <p>最快速、最便捷的Instagram内容下载工具。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h3>Download Tools</h3>
-                        <ul>
-                            <li><a href="#video">Instagram Video Download</a></li>
-                            <li><a href="#reels">Instagram Reels Download</a></li>
-                            <li><a href="#story">Instagram Story Download</a></li>
-                            <li><a href="#photo">Instagram Photo Download</a></li>
-                            <li><a href="#audio">Instagram Audio Download</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h3>Support</h3>
-                        <ul>
-                            <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/tutorial">Tutorial</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h3>Legal</h3>
-                        <ul>
-                            <li><a href="/terms">Terms of Service</a></li>
-                            <li><a href="/privacy">Privacy Policy</a></li>
-                        </ul>
-                    </div>
+                <div class="footer-col">
+                    <h4>工具</h4>
+                    <ul>
+                        <li><a href="#video">Instagram视频下载</a></li>
+                        <li><a href="#reels">Instagram Reels下载</a></li>
+                        <li><a href="#story">Instagram Story下载</a></li>
+                        <li><a href="#photo">Instagram照片下载</a></li>
+                        <li><a href="#audio">Instagram音频下载</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>支持</h4>
+                    <ul>
+                        <li><a href="#faq">常见问题</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
+                        <li><a href="https://github.com/fastdl-space/instagram-downloader">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>法律信息</h4>
+                    <ul>
+                        <li><a href="terms.html">服务条款</a></li>
+                        <li><a href="privacy.html">隐私政策</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="disclaimer">We are not affiliated with Instagram or Meta.</p>
-                <p class="copyright">© 2024 FastDL.Space. All rights reserved.</p>
+                <p>我们不隶属于Instagram或Meta。</p>
+                <p>&copy; 2024 FastDL.space. 保留所有权利。</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/language.js"></script>
 </body>
 </html> 

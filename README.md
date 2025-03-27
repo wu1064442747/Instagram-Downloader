@@ -1,140 +1,120 @@
-# Instagram 下载器
+# Instagram Downloader - FastDL.space
 
-一个功能强大的Instagram内容下载工具，支持下载视频、图片、Reels、故事等内容。
+![FastDL.space](img/logo.png)
 
-## 在线演示
+一个功能强大的Instagram内容下载工具，支持下载视频、照片、Reels、Stories、音频等内容。
 
-访问 [https://f3e3cb81.instagram-downloader-ew4.pages.dev](https://f3e3cb81.instagram-downloader-ew4.pages.dev) 体验在线版本。
+## 特点
 
-## 功能特点
+- 🚀 快速下载Instagram视频、照片、Reels、Stories和音频
+- 📱 支持高清(HD)和超高清(4K)视频下载
+- 📥 批量下载功能，一次处理多个链接
+- 🌐 支持多语言界面（中文、英文）
+- 🔒 支持下载自己账号的私密内容
+- 🔄 持续更新以适应Instagram API变化
+- ☁️ 基于Cloudflare Workers的无服务器后端
 
-- ✅ 批量下载Instagram内容
-- ✅ 支持下载视频、照片、Reels、故事
-- ✅ 高清视频下载支持
-- ✅ 可提取音频
-- ✅ 无需登录Instagram账号
-- ✅ 响应式设计，移动设备友好
-- ✅ 多语言支持（中文、英文）
+## 在线使用
 
-## 技术栈
+访问我们的网站：[FastDL.space](https://fastdl.space)
 
-- 前端：HTML, CSS, JavaScript
-- 后端：Node.js, Cloudflare Workers/Pages Functions
-- 部署：Cloudflare Pages
+## 架构设计
 
-## 本地开发
+整个应用由两部分组成：
+
+1. **前端**：纯静态HTML/CSS/JavaScript网站，可部署在GitHub Pages或任何静态网站托管服务
+2. **后端**：Cloudflare Worker无服务器函数，负责处理Instagram内容的提取和下载
+
+### 技术栈
+
+- **前端**：HTML5, CSS3, 原生JavaScript（无框架依赖）
+- **后端**：Cloudflare Workers (JavaScript)
+- **部署**：GitHub Pages + Cloudflare
+
+## 本地部署
 
 ### 前提条件
 
-- Node.js (版本 14+)
-- npm 或 yarn
+- Web服务器（如Nginx、Apache等）
+- 或者使用GitHub Pages + Cloudflare部署
+- Cloudflare账户（用于部署Worker后端）
 
-### 安装步骤
+### 前端安装步骤
 
 1. 克隆仓库
    ```bash
-   git clone https://github.com/你的用户名/instagram-downloader.git
+   git clone https://github.com/fastdl-space/instagram-downloader.git
    cd instagram-downloader
    ```
 
-2. 安装依赖
-   ```bash
-   npm install
-   ```
+2. 配置Web服务器指向项目根目录
 
-3. 运行开发服务器
-   ```bash
-   npm run dev
-   ```
+3. 访问 `http://localhost` 或您的域名
 
-4. 访问 `http://localhost:8787` 查看网站
+### 后端部署
 
-## 部署
+1. 创建Cloudflare Worker
+   - 登录Cloudflare Dashboard
+   - 进入Workers & Pages
+   - 创建新Worker
+   - 粘贴`worker.js`内容
 
-### 使用Cloudflare Pages部署
+2. 配置Worker路由（可选）
+   - 添加自定义域名，如`instagram-dl.fastdl.space`
+   - 配置DNS设置
 
-1. 安装Wrangler CLI
-   ```bash
-   npm install -g wrangler
-   ```
+3. 更新前端代码中的API端点
+   - 修改`js/main.js`中的`API_ENDPOINT`变量，指向您的Worker URL
 
-2. 登录Cloudflare
-   ```bash
-   wrangler login
-   ```
+完整部署指南请参见 [DEPLOY.md](DEPLOY.md)
 
-3. 部署到Cloudflare Pages
-   ```bash
-   npm run deploy
-   ```
+## 使用方法
 
-### 使用Docker部署
+1. 在Instagram应用或网页上复制链接
+2. 将链接粘贴到FastDL.space下载框中
+3. 点击下载按钮获取内容
 
-1. 构建Docker镜像
-   ```bash
-   docker build -t instagram-downloader .
-   ```
+## 批量下载
 
-2. 运行容器
-   ```bash
-   docker run -p 3000:3000 instagram-downloader
-   ```
+1. 准备多个Instagram链接，每行一个
+2. 粘贴到批量下载文本框中
+3. 点击"批量下载"按钮
+4. 选择保存位置即可
 
-3. 访问 `http://localhost:3000` 查看网站
+## 后端API
 
-## 项目结构
+Worker提供以下API端点：
 
-```
-├── public/                # 静态资源目录
-│   ├── css/               # CSS样式文件
-│   ├── js/                # JavaScript文件
-│   ├── img/               # 图片资源
-│   └── index.html         # 中文版主页
-├── functions/             # Cloudflare Pages Functions
-│   └── api/               # API处理函数
-│       └── [[route]].js   # API路由处理
-├── css/                   # 源CSS文件
-├── js/                    # 源JavaScript文件
-├── img/                   # 源图片文件
-├── cloudflare-worker.js   # Cloudflare Worker脚本
-├── server.js              # Node.js服务器脚本
-├── wrangler.toml          # Wrangler配置文件
-├── Dockerfile             # Docker配置文件
-├── docker-compose.yml     # Docker Compose配置
-├── package.json           # 项目依赖配置
-└── README.md              # 项目说明文档
-```
+- `POST /`
+  - 请求体: `{ "url": "https://www.instagram.com/p/..." }`
+  - 响应: `{ "success": true, "type": "Video", "url": "...", "thumbnail": "...", "title": "...", "size": "..." }`
 
-## API参考
+## 贡献
 
-### 获取缩略图
+欢迎通过以下方式贡献：
 
-```
-GET /api/thumbnail?url={instagram_url}
-```
-
-### 下载内容
-
-```
-GET /api/download?url={instagram_url}&quality={quality}&format={format}
-```
-
-参数说明：
-- `quality`: 视频质量，可选值为`highest`, `hd`, `sd`
-- `format`: 输出格式，可选值为`original`, `mp4`, `mp3`
-
-## 贡献指南
-
-1. Fork项目
-2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m '添加了一个很棒的功能'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
+1. Fork该项目
+2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 创建Pull Request
+
+## 注意事项
+
+- Instagram API可能随时变化，可能需要更新Worker脚本中的提取逻辑
+- 某些内容（如Stories）可能需要登录才能访问
+- 请遵守当地法律法规和Instagram服务条款使用本工具
 
 ## 许可证
 
-本项目采用MIT许可证 - 详情请查看[LICENSE](LICENSE)文件
+此项目采用MIT许可证 - 详情请参见 [LICENSE](LICENSE) 文件
 
 ## 免责声明
 
-本工具仅用于学习和研究目的，请用户遵守Instagram的服务条款，不要下载和分享未经授权的内容。开发者对用户的行为不承担任何责任。 
+FastDL.space是一个独立自主开发的应用和网站，不隶属于Instagram或Meta。我们的工具旨在帮助用户下载自己账户上传的内容，请遵守当地法律法规和Instagram的服务条款使用本工具。
+
+## 联系我们
+
+- 电子邮件: support@fastdl.space
+- GitHub: [github.com/fastdl-space](https://github.com/fastdl-space)
+- 网站: [FastDL.space](https://fastdl.space) 
