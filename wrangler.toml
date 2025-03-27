@@ -1,0 +1,25 @@
+# Pages项目配置
+name = "instagram-downloader-pages"
+compatibility_date = "2023-06-10"
+
+# Pages配置
+pages_build_output_dir = "public"
+
+[vars]
+# 定义环境变量
+REDIRECT_URL = "https://ssinstagram.com/api/instagram/downloader"
+WEBSITE_URL = "https://fastdl.space"
+
+# 可选：KV命名空间设置
+# [[kv_namespaces]]
+# binding = "INSTAGRAM_CACHE"
+# id = "xxxx" # 你需要在Cloudflare Dashboard创建KV并获取ID
+
+# 可选：添加自定义域名
+# [route]
+# pattern = "api.fastdl.space/*"
+# zone_name = "fastdl.space"
+
+[dev]
+port = 8787
+local_protocol = "http" 

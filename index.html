@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastDL.Space - Instagram Downloader | Download Videos & Photos in Batch</title>
+    <meta name="description" content="Instagram Downloader Tool - Easily download Instagram videos, Reels, stories, photos, audio, and more. Supports batch download, HD MP4, no login required.">
+    <meta name="keywords" content="Instagram Downloader, Instagram Video Download, Instagram Reels Download, Instagram Story Download, Instagram Photo Download, Instagram Audio Download, Instagram Private Content Download">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <h1>FastDL.Space</h1>
+                    <p>Instagram Downloader</p>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#video">Video Download</a></li>
+                    <li><a href="#reels">Reels Download</a></li>
+                    <li><a href="#story">Story Download</a></li>
+                    <li><a href="#photo">Photo Download</a></li>
+                    <li><a href="#audio">Audio Download</a></li>
+                    <li><a href="#private">Private Content</a></li>
+                </ul>
+            </nav>
+            <div class="language-selector">
+                <button id="language-toggle" data-target-lang="zh"><i class="fas fa-globe"></i> <span>English</span></button>
+                <div class="language-dropdown">
+                    <a href="#" data-lang="zh">🇨🇳 中文</a>
+                    <a href="#" data-lang="en">🇺🇸 English</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="main-title">Instagram Video/Photo/Reels/Story Downloader</h1>
+                <p class="subtitle">No login required, one-click batch download, supporting HD videos, photos, Reels, stories, etc.</p>
+                
+                <div class="download-box">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="all">All Content</button>
+                        <button class="tab-btn" data-tab="video">Video</button>
+                        <button class="tab-btn" data-tab="reels">Reels</button>
+                        <button class="tab-btn" data-tab="story">Story</button>
+                        <button class="tab-btn" data-tab="photo">Photo</button>
+                        <button class="tab-btn" data-tab="audio">Audio</button>
+                    </div>
+                    
+                    <div class="input-area">
+                        <textarea id="instagram-urls" placeholder="Paste Instagram links here, one per line, supports batch adding..."></textarea>
+                        <div class="action-buttons">
+                            <button id="paste-button"><i class="fas fa-paste"></i> Paste</button>
+                            <button id="clear-button"><i class="fas fa-trash"></i> Clear</button>
+                        </div>
+                    </div>
+                    
+                    <div class="download-options">
+                        <div class="quality-selector">
+                            <label>Video Quality:</label>
+                            <select id="quality-select">
+                                <option value="highest">Highest Quality</option>
+                                <option value="hd">HD Quality</option>
+                                <option value="sd">SD Quality</option>
+                            </select>
+                        </div>
+                        <div class="format-selector">
+                            <label>Download Format:</label>
+                            <select id="format-select">
+                                <option value="original">Original Format</option>
+                                <option value="mp4">MP4</option>
+                                <option value="mp3">MP3 (Audio Only)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button id="download-button" class="primary-button">
+                        <i class="fas fa-download"></i> Start Download
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="results" id="results">
+            <div class="container">
+                <h2>Download Results</h2>
+                <div class="progress-container" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="progress-text">Processing... <span class="progress-percentage">0%</span></div>
+                </div>
+                <div class="results-list">
+                    <!-- Results will be dynamically added here -->
+                </div>
+                <div class="batch-actions" style="display: none;">
+                    <button id="download-all" class="secondary-button">
+                        <i class="fas fa-download"></i> Download All
+                    </button>
+                    <button id="copy-all-links" class="secondary-button">
+                        <i class="fas fa-copy"></i> Copy All Links
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>FastDL.Space Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Fast Batch Download</h3>
+                        <p>Add multiple links at once and batch download Instagram content</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-lock"></i>
+                        <h3>No Login Required</h3>
+                        <p>No need to provide Instagram account credentials, protecting your privacy</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-video"></i>
+                        <h3>HD Video Download</h3>
+                        <p>Support for 4K, HD high-definition video downloads, crystal clear quality</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile-Friendly</h3>
+                        <p>Easily download Instagram content on your phone or tablet</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-music"></i>
+                        <h3>Extract Audio</h3>
+                        <p>Extract MP3 audio from Instagram videos</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-history"></i>
+                        <h3>No Download Limits</h3>
+                        <p>Completely free, no download restrictions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-to-use">
+            <div class="container">
+                <h2>How to Use FastDL.Space</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Copy Instagram Link</h3>
+                            <p>Click "..." in the Instagram app on a post, and select "Copy Link"</p>
+                            <div class="step-image">
+                                <img src="img/step1.png" alt="Copy Instagram Link">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Paste Links</h3>
+                            <p>Paste the copied link into the text box above, supports adding multiple links</p>
+                            <div class="step-image">
+                                <img src="img/step2.png" alt="Paste Links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Start Download</h3>
+                            <p>Click the "Start Download" button and wait for processing to complete before downloading your content</p>
+                            <div class="step-image">
+                                <img src="img/step3.png" alt="Start Download">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            What is an Instagram Downloader?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>An Instagram downloader is an online tool that allows you to download photos, videos, Reels, and stories from Instagram. FastDL.Space is one of the best tools for downloading Instagram content.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Do I need to log in with my Instagram account?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>No. FastDL.Space does not require you to log in to your Instagram account, ensuring you can download content safely and anonymously.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Is this Instagram video and photo download service free?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Yes, this service is completely free and has no download limits.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Can I download content from a private Instagram account?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Generally, you cannot download videos, stories, or photos from private Instagram accounts. However, FastDL.Space offers special private content download functionality that requires additional verification information.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Can I download Instagram stories?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Yes, you can view and download Instagram stories. Simply click "⋯" on the story, select "Copy Link", and paste the link into FastDL.Space to download it.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Where are downloaded videos saved?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Typically, videos are saved in the "Downloads" folder on Android devices and PCs, and in the "Files" app or photo library on iOS devices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>FastDL.Space</h2>
+                    <p>Instagram Content Downloader</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Download Tools</h3>
+                        <ul>
+                            <li><a href="#video">Instagram Video Download</a></li>
+                            <li><a href="#reels">Instagram Reels Download</a></li>
+                            <li><a href="#story">Instagram Story Download</a></li>
+                            <li><a href="#photo">Instagram Photo Download</a></li>
+                            <li><a href="#audio">Instagram Audio Download</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/tutorial">Tutorial</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="/terms">Terms of Service</a></li>
+                            <li><a href="/privacy">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="disclaimer">We are not affiliated with Instagram or Meta.</p>
+                <p class="copyright">© 2024 FastDL.Space. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 

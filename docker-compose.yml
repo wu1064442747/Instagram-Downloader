@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./downloads:/app/downloads
+    restart: unless-stopped
+    
+  # 可选：添加Nginx代理服务，用于SSL和缓存
+  # nginx:
+  #   image: nginx:alpine
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx/conf.d:/etc/nginx/conf.d
+  #     - ./nginx/ssl:/etc/nginx/ssl
+  #     - ./nginx/cache:/var/cache/nginx
+  #   depends_on:
+  #     - app
+  #   restart: unless-stopped 
