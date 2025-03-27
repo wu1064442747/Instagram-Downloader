@@ -225,10 +225,10 @@ function addResultItem(url, quality, format) {
     let title = 'Instagram 内容';
     
     // 根据URL确定内容类型
-    if (url.includes('/reel/')) {
+    if (url.includes('/reel/') || url.includes('/reels/')) {
         type = 'reels';
         title = 'Instagram Reels';
-    } else if (url.includes('/stories/')) {
+    } else if (url.includes('/stories/') || url.includes('/story/')) {
         type = 'story';
         title = 'Instagram Story';
     } else if (url.includes('/p/')) {
@@ -252,34 +252,107 @@ function addResultItem(url, quality, format) {
     // 检查当前页面语言
     const isEnglishPage = window.location.pathname.includes('en.html');
     
-    // 根据当前页面语言设置按钮文本
-    const copyText = isEnglishPage ? 'Copy Link' : '复制链接';
-    const downloadText = isEnglishPage ? 'Download' : '下载';
+    // 创建结果项元素
+    const resultItem = document.createElement('div');
+    resultItem.className = 'result-item';
+    resultItem.id = id;
     
-    // 创建结果项的HTML
-    const resultItemHTML = `
-        <div class="result-item" id="${id}">
-            <div class="result-thumbnail">
-                <img src="${thumbnailUrl}" alt="${title}">
-                <div class="result-type">${type.toUpperCase()}</div>
-            </div>
-            <div class="result-info">
-                <div class="result-title">${title}</div>
-                <div class="result-actions">
-                    <button class="result-button" onclick="copyToClipboard('${downloadLink}')">
-                        <i class="fas fa-copy"></i> ${copyText}
-                    </button>
-                    <a href="${downloadLink}" class="result-button download result-download-link" download>
-                        <i class="fas fa-download"></i> ${downloadText}
-                    </a>
-                </div>
-            </div>
+    // 添加加载指示器
+    resultItem.innerHTML = `
+        <div class="result-loading">
+            <div class="spinner"></div>
+            <p>${isEnglishPage ? 'Loading...' : '加载中...'}</p>
         </div>
     `;
     
-    // 添加到结果列表
-    const resultsList = document.querySelector('.results-list');
-    resultsList.insertAdjacentHTML('beforeend', resultItemHTML);
+    // 将结果项添加到结果列表
+    document.querySelector('.results-list').appendChild(resultItem);
+    
+    // 获取缩略图
+    fetch(thumbnailUrl)
+        .then(response => response.json())
+        .then(data => {
+            // 使用获取的缩略图或后备图片
+            const thumbnailSrc = data.success ? data.thumbnail : (data.fallback || 'https://via.placeholder.com/640x640.png?text=Instagram+Content');
+            
+            // 更新结果项内容
+            resultItem.innerHTML = `
+                <div class="result-thumbnail">
+                    <div class="result-type-badge">${type.toUpperCase()}</div>
+                    <img src="${thumbnailSrc}" alt="${title}" onerror="this.src='https://via.placeholder.com/640x640.png?text=No+Preview'">
+                </div>
+                <div class="result-info">
+                    <h3 class="result-title">${title}</h3>
+                    <p class="result-url">${url}</p>
+                    <div class="result-actions">
+                        <a href="${downloadLink}" target="_blank" class="result-download-link">
+                            <button class="download-button">
+                                <i class="fas fa-download"></i> ${isEnglishPage ? 'Download' : '下载'}
+                            </button>
+                        </a>
+                        <button class="copy-link-button" data-link="${downloadLink}">
+                            <i class="fas fa-copy"></i> ${isEnglishPage ? 'Copy Link' : '复制链接'}
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // 绑定复制链接按钮事件
+            resultItem.querySelector('.copy-link-button').addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                copyToClipboard(link);
+                
+                // 显示复制成功提示
+                const originalText = this.innerHTML;
+                this.innerHTML = `<i class="fas fa-check"></i> ${isEnglishPage ? 'Copied!' : '已复制!'}`;
+                
+                // 恢复原始文本
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                }, 2000);
+            });
+        })
+        .catch(error => {
+            console.error('获取缩略图失败:', error);
+            
+            // 使用后备图片
+            resultItem.innerHTML = `
+                <div class="result-thumbnail">
+                    <div class="result-type-badge">${type.toUpperCase()}</div>
+                    <img src="https://via.placeholder.com/640x640.png?text=Error" alt="${title}">
+                </div>
+                <div class="result-info">
+                    <h3 class="result-title">${title}</h3>
+                    <p class="result-url">${url}</p>
+                    <p class="result-error">${isEnglishPage ? 'Failed to load thumbnail' : '缩略图加载失败'}</p>
+                    <div class="result-actions">
+                        <a href="${downloadLink}" target="_blank" class="result-download-link">
+                            <button class="download-button">
+                                <i class="fas fa-download"></i> ${isEnglishPage ? 'Download' : '下载'}
+                            </button>
+                        </a>
+                        <button class="copy-link-button" data-link="${downloadLink}">
+                            <i class="fas fa-copy"></i> ${isEnglishPage ? 'Copy Link' : '复制链接'}
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // 绑定复制链接按钮事件
+            resultItem.querySelector('.copy-link-button').addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                copyToClipboard(link);
+                
+                // 显示复制成功提示
+                const originalText = this.innerHTML;
+                this.innerHTML = `<i class="fas fa-check"></i> ${isEnglishPage ? 'Copied!' : '已复制!'}`;
+                
+                // 恢复原始文本
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                }, 2000);
+            });
+        });
 }
 
 // 复制文本到剪贴板
