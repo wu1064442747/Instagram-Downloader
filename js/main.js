@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const accordionItems = document.querySelectorAll('.accordion-item');
     
     // Cloudflare Worker API 端点
-    const API_ENDPOINT = 'https://instagram-downloader.wu1064442747.workers.dev';
+    const API_ENDPOINT = 'https://fastdl.space';
     
     // 单个链接下载
     if (downloadBtn) {
