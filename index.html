@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FastDL - Instagram 内容下载工具</title>
-    <meta name="description" content="下载Instagram视频、照片、Reels、Stories和音频，支持批量下载和私密内容。快速、免费且无广告。">
+    <title>FastDL - Instagram Content Downloader</title>
+    <meta name="description" content="Download Instagram videos, photos, Reels, Stories and audio, supports batch download and private content. Fast, free and no ads.">
     <meta name="keywords" content="Instagram Downloader, Instagram Video Download, Instagram Reels Download, Instagram Story Download, Instagram Photo Download, Instagram Audio Download, Instagram Private Content Download">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -134,36 +134,26 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#video">视频下载</a></li>
-                    <li><a href="#reels">Reels下载</a></li>
-                    <li><a href="#story">Stories下载</a></li>
-                    <li><a href="#photo">照片下载</a></li>
-                    <li><a href="#audio">音频下载</a></li>
-                    <li><a href="#private">私密内容</a></li>
-                    <li><a href="#batch">批量下载</a></li>
+                    <li><a href="#video">Video Download</a></li>
+                    <li><a href="#reels">Reels Download</a></li>
+                    <li><a href="#story">Stories Download</a></li>
+                    <li><a href="#photo">Photo Download</a></li>
+                    <li><a href="#audio">Audio Download</a></li>
+                    <li><a href="#private">Private Content</a></li>
+                    <li><a href="#batch">Batch Download</a></li>
                 </ul>
             </nav>
-            <div class="language-selector">
-                <button id="language-toggle" class="lang-btn">
-                    <span class="current-lang">中文</span>
-                    <i class="fas fa-globe"></i>
-                </button>
-                <div class="language-dropdown">
-                    <a href="#" data-lang="zh">🇨🇳 中文</a>
-                    <a href="#" data-lang="en">🇺🇸 English</a>
-                </div>
-            </div>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
-            <h1>Instagram 内容下载工具</h1>
-            <h2>下载视频、照片、Reels、Stories和音频，快速且免费</h2>
+            <h1>Instagram Content Downloader</h1>
+            <h2>Download videos, photos, Reels, Stories and audio, fast and free</h2>
             <div class="main-downloader">
                 <form id="main-form" class="download-form">
-                    <input type="text" id="main-url" placeholder="粘贴Instagram链接 (视频、照片、Reels、Stories)" required>
-                    <button type="submit" class="download-btn">下载</button>
+                    <input type="text" id="main-url" placeholder="Paste Instagram link (video, photo, Reels, Stories)" required>
+                    <button type="submit" class="download-btn">Download</button>
                 </form>
                 <div class="loader" id="main-loader"></div>
                 <div id="download-results" class="download-results"></div>
@@ -175,41 +165,41 @@
         <div class="container">
             <div class="feature-box">
                 <i class="fas fa-bolt"></i>
-                <h3>极速下载</h3>
-                <p>提供最快的下载速度，无需等待</p>
+                <h3>Fast Download</h3>
+                <p>Provides the fastest download speed, no waiting</p>
             </div>
             <div class="feature-box">
                 <i class="fas fa-lock"></i>
-                <h3>安全保障</h3>
-                <p>无需登录Instagram账号，保护您的隐私</p>
+                <h3>Security Guaranteed</h3>
+                <p>No Instagram login required, protecting your privacy</p>
             </div>
             <div class="feature-box">
                 <i class="fas fa-layer-group"></i>
-                <h3>批量下载</h3>
-                <p>一次下载多个Instagram内容</p>
+                <h3>Batch Download</h3>
+                <p>Download multiple Instagram content at once</p>
             </div>
             <div class="feature-box">
                 <i class="fas fa-hd"></i>
-                <h3>高清质量</h3>
-                <p>支持高达4K清晰度的原始质量下载</p>
+                <h3>HD Quality</h3>
+                <p>Supports original quality downloads up to 4K resolution</p>
             </div>
         </div>
     </section>
 
     <section id="video" class="download-section">
         <div class="container">
-            <h2>Instagram 视频下载</h2>
-            <p>下载Instagram视频，支持mp4、高清、4K格式</p>
+            <h2>Instagram Video Download</h2>
+            <p>Download Instagram videos, supports mp4, HD, 4K formats</p>
             <div class="download-form-container">
                 <form id="video-form" class="download-form">
-                    <input type="text" id="video-url" placeholder="粘贴Instagram视频链接" required>
+                    <input type="text" id="video-url" placeholder="Paste Instagram video link" required>
                     <select id="video-quality">
-                        <option value="auto">自动 (推荐)</option>
-                        <option value="standard">标准质量</option>
-                        <option value="hd">高清 HD</option>
-                        <option value="4k">超高清 4K</option>
+                        <option value="auto">Auto (Recommended)</option>
+                        <option value="standard">Standard Quality</option>
+                        <option value="hd">HD Quality</option>
+                        <option value="4k">Ultra HD 4K</option>
                     </select>
-                    <button type="submit" class="download-btn">下载视频</button>
+                    <button type="submit" class="download-btn">Download Video</button>
                 </form>
                 <div class="loader" id="video-loader"></div>
                 <div id="video-results" class="download-results"></div>
