@@ -6,8 +6,81 @@
     <title>FastDL - Instagram 内容下载工具</title>
     <meta name="description" content="下载Instagram视频、照片、Reels、Stories和音频，支持批量下载和私密内容。快速、免费且无广告。">
     <meta name="keywords" content="Instagram Downloader, Instagram Video Download, Instagram Reels Download, Instagram Story Download, Instagram Photo Download, Instagram Audio Download, Instagram Private Content Download">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 内联基本样式，确保页面至少有基本格式 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #405de6;
+            --secondary-color: #5851db;
+            --gradient-start: #405de6;
+            --gradient-middle: #5851db;
+            --gradient-end: #833ab4;
+            --text-color: #333;
+            --light-text: #fff;
+            --dark-bg: #f9f9f9;
+            --light-bg: #fff;
+            --border-color: #e0e0e0;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        header {
+            background-color: var(--light-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -319,6 +392,6 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html> 
