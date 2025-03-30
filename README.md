@@ -1,120 +1,184 @@
-# Instagram Downloader - FastDL.space
+# FastDL.space - Instagram 内容下载器
 
-![FastDL.space](img/logo.png)
+FastDL.space 是一个功能强大的 Instagram 内容下载工具，支持视频、照片、Reels、Stories、音频和私密内容下载。支持中英文双语界面，并且具有批量下载功能。
 
-一个功能强大的Instagram内容下载工具，支持下载视频、照片、Reels、Stories、音频等内容。
+## 功能特性
 
-## 特点
+- ✅ 下载 Instagram 视频（MP4、高清、4K）
+- ✅ 下载 Instagram 照片（原始质量）
+- ✅ 下载 Instagram Reels 短视频
+- ✅ 下载 Instagram Stories 故事
+- ✅ 从视频中提取音频（MP3、M4A）
+- ✅ 下载私密账号内容（需授权）
+- ✅ 批量下载功能
+- ✅ 中英文界面切换
+- ✅ 无需安装额外软件
+- ✅ 完全免费使用
 
-- 🚀 快速下载Instagram视频、照片、Reels、Stories和音频
-- 📱 支持高清(HD)和超高清(4K)视频下载
-- 📥 批量下载功能，一次处理多个链接
-- 🌐 支持多语言界面（中文、英文）
-- 🔒 支持下载自己账号的私密内容
-- 🔄 持续更新以适应Instagram API变化
-- ☁️ 基于Cloudflare Workers的无服务器后端
+## 技术实现
 
-## 在线使用
+项目使用以下技术栈构建：
 
-访问我们的网站：[FastDL.space](https://fastdl.space)
+- **前端**：HTML5, CSS3, JavaScript（原生）
+- **后端**：Node.js, Express
+- **数据提取**：Axios, Cheerio
+- **媒体处理**：ffmpeg, ytdl-core
+- **Instagram API**：instagram-private-api
 
-## 架构设计
+## 安装说明
 
-整个应用由两部分组成：
-
-1. **前端**：纯静态HTML/CSS/JavaScript网站，可部署在GitHub Pages或任何静态网站托管服务
-2. **后端**：Cloudflare Worker无服务器函数，负责处理Instagram内容的提取和下载
-
-### 技术栈
-
-- **前端**：HTML5, CSS3, 原生JavaScript（无框架依赖）
-- **后端**：Cloudflare Workers (JavaScript)
-- **部署**：GitHub Pages + Cloudflare
-
-## 本地部署
+要在本地运行此项目，请按照以下步骤操作：
 
 ### 前提条件
 
-- Web服务器（如Nginx、Apache等）
-- 或者使用GitHub Pages + Cloudflare部署
-- Cloudflare账户（用于部署Worker后端）
+- Node.js (v14.0.0 或更高版本)
+- npm 或 yarn
+- FFmpeg（用于音频提取功能）
 
-### 前端安装步骤
+### 安装步骤
 
-1. 克隆仓库
-   ```bash
-   git clone https://github.com/fastdl-space/instagram-downloader.git
-   cd instagram-downloader
-   ```
+1. 克隆此仓库：
 
-2. 配置Web服务器指向项目根目录
+```bash
+git clone https://github.com/yourusername/instagram-downloader.git
+cd instagram-downloader
+```
 
-3. 访问 `http://localhost` 或您的域名
+2. 安装依赖：
 
-### 后端部署
+```bash
+npm install
+# 或使用 yarn
+yarn install
+```
 
-1. 创建Cloudflare Worker
-   - 登录Cloudflare Dashboard
-   - 进入Workers & Pages
-   - 创建新Worker
-   - 粘贴`worker.js`内容
+3. 安装 FFmpeg（如果尚未安装）：
 
-2. 配置Worker路由（可选）
-   - 添加自定义域名，如`instagram-dl.fastdl.space`
-   - 配置DNS设置
+**Windows**：
+- 下载 FFmpeg 静态构建版本：https://ffmpeg.org/download.html
+- 将 FFmpeg 添加到系统 PATH
 
-3. 更新前端代码中的API端点
-   - 修改`js/main.js`中的`API_ENDPOINT`变量，指向您的Worker URL
+**macOS**：
+```bash
+brew install ffmpeg
+```
 
-完整部署指南请参见 [DEPLOY.md](DEPLOY.md)
+**Linux**：
+```bash
+sudo apt update
+sudo apt install ffmpeg
+```
 
-## 使用方法
+4. 创建 `downloads` 目录：
 
-1. 在Instagram应用或网页上复制链接
-2. 将链接粘贴到FastDL.space下载框中
-3. 点击下载按钮获取内容
+```bash
+mkdir downloads
+```
 
-## 批量下载
+5. 启动服务器：
 
-1. 准备多个Instagram链接，每行一个
-2. 粘贴到批量下载文本框中
-3. 点击"批量下载"按钮
-4. 选择保存位置即可
+```bash
+npm start
+# 或使用开发模式
+npm run dev
+```
 
-## 后端API
+6. 在浏览器中访问：
 
-Worker提供以下API端点：
+```
+http://localhost:3000
+```
 
-- `POST /`
-  - 请求体: `{ "url": "https://www.instagram.com/p/..." }`
-  - 响应: `{ "success": true, "type": "Video", "url": "...", "thumbnail": "...", "title": "...", "size": "..." }`
+## 使用说明
 
-## 贡献
+### 下载视频
 
-欢迎通过以下方式贡献：
+1. 在 Instagram 上找到要下载的视频帖子
+2. 点击右上角的 "..." 并选择 "复制链接"
+3. 在 FastDL.space 网站上粘贴链接
+4. 选择所需的视频质量（可选）
+5. 点击 "下载视频" 按钮
+6. 等待处理完成后点击下载链接
 
-1. Fork该项目
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建Pull Request
+### 下载 Reels
+
+1. 在 Instagram 上找到要下载的 Reels
+2. 点击右上角的 "..." 并选择 "复制链接"
+3. 在 FastDL.space 网站上粘贴链接
+4. 点击 "下载 Reels" 按钮
+5. 等待处理完成后点击下载链接
+
+### 下载 Stories
+
+1. 在 Instagram 上查看要下载的 Story
+2. 点击 "..." 并选择 "复制链接"
+3. 在 FastDL.space 网站上粘贴链接
+4. 点击 "下载 Stories" 按钮
+5. 等待处理完成后点击下载链接
+
+### 批量下载
+
+1. 收集多个 Instagram 链接
+2. 在批量下载区域中，每行粘贴一个链接
+3. 点击 "批量下载" 按钮
+4. 等待处理完成后，可以单个下载或点击 "下载全部"
+
+## API 参考
+
+FastDL.space 也提供了 API 接口，可以集成到其他应用中：
+
+### 下载内容
+
+```
+POST /api/download
+Content-Type: application/json
+
+{
+  "url": "https://www.instagram.com/p/XXXX",
+  "type": "auto",  // 可选：auto, video, photo, reels, story
+  "quality": "auto" // 可选：auto, standard, hd, 4k
+}
+```
+
+### 提取音频
+
+```
+POST /api/extract-audio
+Content-Type: application/json
+
+{
+  "url": "https://www.instagram.com/p/XXXX",
+  "format": "mp3" // 可选：mp3, m4a
+}
+```
+
+### 批量下载
+
+```
+POST /api/batch-download
+Content-Type: application/json
+
+{
+  "urls": [
+    "https://www.instagram.com/p/XXXX",
+    "https://www.instagram.com/p/YYYY",
+    "https://www.instagram.com/p/ZZZZ"
+  ]
+}
+```
 
 ## 注意事项
 
-- Instagram API可能随时变化，可能需要更新Worker脚本中的提取逻辑
-- 某些内容（如Stories）可能需要登录才能访问
-- 请遵守当地法律法规和Instagram服务条款使用本工具
+- 本工具仅用于下载您自己的 Instagram 内容
+- 私密账号内容下载需要 Instagram 授权
+- 我们不会储存您的 Instagram 账号信息
+- 下载的文件会自动在 24 小时后删除
+- 使用此工具时请遵守 Instagram 的服务条款
 
 ## 许可证
 
-此项目采用MIT许可证 - 详情请参见 [LICENSE](LICENSE) 文件
-
-## 免责声明
-
-FastDL.space是一个独立自主开发的应用和网站，不隶属于Instagram或Meta。我们的工具旨在帮助用户下载自己账户上传的内容，请遵守当地法律法规和Instagram的服务条款使用本工具。
+本项目采用 MIT 许可证。详情请见 [LICENSE](LICENSE) 文件。
 
 ## 联系我们
 
-- 电子邮件: support@fastdl.space
-- GitHub: [github.com/fastdl-space](https://github.com/fastdl-space)
-- 网站: [FastDL.space](https://fastdl.space) 
+如有问题或建议，请联系：contact@fastdl.space 
