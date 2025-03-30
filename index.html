@@ -6,10 +6,10 @@
     <title>FastDL - Instagram 内容下载工具</title>
     <meta name="description" content="下载Instagram视频、照片、Reels、Stories和音频，支持批量下载和私密内容。快速、免费且无广告。">
     <meta name="keywords" content="Instagram Downloader, Instagram Video Download, Instagram Reels Download, Instagram Story Download, Instagram Photo Download, Instagram Audio Download, Instagram Private Content Download">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- 内联基本样式，确保页面至少有基本格式 -->
     <style>
+        /* 内联基本样式，确保页面至少有基本格式 */
         * {
             margin: 0;
             padding: 0;
@@ -79,6 +79,48 @@
         
         nav ul li {
             margin-left: 20px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--light-text);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .hero h2 {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+        
+        .download-form {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .download-form input[type="text"] {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+        
+        .download-btn {
+            background-color: var(--success-color);
+            color: var(--light-text);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 0 4px 4px 0;
+            font-size: 16px;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -392,6 +434,6 @@
         </div>
     </footer>
 
-    <script src="./js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html> 
