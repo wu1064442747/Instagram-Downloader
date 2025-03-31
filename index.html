@@ -1,429 +1,343 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FastDL - Instagram Content Downloader</title>
-    <meta name="description" content="Download Instagram videos, photos, Reels, Stories and audio, supports batch download and private content. Fast, free and no ads.">
-    <meta name="keywords" content="Instagram Downloader, Instagram Video Download, Instagram Reels Download, Instagram Story Download, Instagram Photo Download, Instagram Audio Download, Instagram Private Content Download">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Instagram Downloader - FastDL.space</title>
+    <meta name="description" content="Free Instagram Video Downloader - Download Instagram videos, reels, stories and photos in HD quality">
+    <meta name="keywords" content="instagram video download, instagram reels download, instagram story download, instagram photo download, instagram audio download, instagram private content download">
     <style>
-        /* Basic inline styles to ensure page has at least basic formatting */
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #1e293b;
+            --text-color: #ffffff;
+            --bg-color: #0f172a;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        :root {
-            --primary-color: #405de6;
-            --secondary-color: #5851db;
-            --gradient-start: #405de6;
-            --gradient-middle: #5851db;
-            --gradient-end: #833ab4;
-            --text-color: #333;
-            --light-text: #fff;
-            --dark-bg: #f9f9f9;
-            --light-bg: #fff;
-            --border-color: #e0e0e0;
-            --success-color: #28a745;
-            --error-color: #dc3545;
-            --warning-color: #ffc107;
-            --info-color: #17a2b8;
-        }
-        
+
         body {
-            background-color: var(--light-bg);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #1e293b);
             color: var(--text-color);
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 2rem;
         }
-        
-        a {
-            text-decoration: none;
-            color: var(--primary-color);
+
+        .header {
+            text-align: center;
+            padding: 4rem 0;
         }
-        
-        header {
-            background-color: var(--light-bg);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 15px 0;
-        }
-        
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #60a5fa, #4f46e5);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
+
+        .header p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: var(--light-text);
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
-        
-        .hero h2 {
-            font-size: 22px;
-            font-weight: 400;
-            margin-bottom: 40px;
-        }
-        
+
         .download-form {
-            display: flex;
-            margin-bottom: 20px;
-            position: relative;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        
-        .download-form input[type="text"] {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 4px 0 0 4px;
-            font-size: 16px;
+
+        .form-group {
+            margin-bottom: 1.5rem;
         }
-        
-        .download-btn {
-            background-color: var(--success-color);
-            color: var(--light-text);
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #334155;
+            border-radius: 0.5rem;
+            background: #1e293b;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: #fff;
             border: none;
-            padding: 15px 30px;
-            border-radius: 0 4px 4px 0;
-            font-size: 16px;
+            border-radius: 0.5rem;
+            font-size: 1rem;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card h3 {
+            color: #60a5fa;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .language-switch button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .language-switch button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="/">
-                    <h1>FastDL.space</h1>
-                </a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#video">Video Download</a></li>
-                    <li><a href="#reels">Reels Download</a></li>
-                    <li><a href="#story">Stories Download</a></li>
-                    <li><a href="#photo">Photo Download</a></li>
-                    <li><a href="#audio">Audio Download</a></li>
-                    <li><a href="#private">Private Content</a></li>
-                    <li><a href="#batch">Batch Download</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div class="language-switch">
+        <button onclick="toggleLanguage()">中文/English</button>
+    </div>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Instagram Content Downloader</h1>
-            <h2>Download videos, photos, Reels, Stories and audio, fast and free</h2>
-            <div class="main-downloader">
-                <form id="main-form" class="download-form">
-                    <input type="text" id="main-url" placeholder="Paste Instagram link (video, photo, Reels, Stories)" required>
-                    <button type="submit" class="download-btn">Download</button>
-                </form>
-                <div class="loader" id="main-loader"></div>
-                <div id="download-results" class="download-results"></div>
-            </div>
-        </div>
-    </section>
+    <div class="container">
+        <header class="header">
+            <h1>Instagram Downloader</h1>
+            <p>Download Instagram videos, reels, stories and photos in HD quality</p>
+        </header>
 
-    <section class="features">
-        <div class="container">
-            <div class="feature-box">
-                <i class="fas fa-bolt"></i>
-                <h3>Fast Download</h3>
-                <p>Provides the fastest download speed, no waiting</p>
+        <div class="download-form">
+            <form id="downloadForm">
+                <div class="form-group">
+                    <label for="url">Instagram URL</label>
+                    <input type="url" id="url" name="url" placeholder="https://www.instagram.com/..." required>
+                </div>
+                <button type="submit" class="btn" id="downloadBtn">Download</button>
+            </form>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Video Download</h3>
+                <p>Download Instagram videos in HD quality</p>
             </div>
-            <div class="feature-box">
-                <i class="fas fa-lock"></i>
-                <h3>Security Guaranteed</h3>
-                <p>No Instagram login required, protecting your privacy</p>
+            <div class="feature-card">
+                <h3>Reels Download</h3>
+                <p>Save Instagram Reels to your device</p>
             </div>
-            <div class="feature-box">
-                <i class="fas fa-layer-group"></i>
-                <h3>Batch Download</h3>
-                <p>Download multiple Instagram content at once</p>
-            </div>
-            <div class="feature-box">
-                <i class="fas fa-hd"></i>
-                <h3>HD Quality</h3>
-                <p>Supports original quality downloads up to 4K resolution</p>
+            <div class="feature-card">
+                <h3>Story Download</h3>
+                <p>Download Instagram Stories before they expire</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="video" class="download-section">
-        <div class="container">
-            <h2>Instagram Video Download</h2>
-            <p>Download Instagram videos, supports mp4, HD, 4K formats</p>
-            <div class="download-form-container">
-                <form id="video-form" class="download-form">
-                    <input type="text" id="video-url" placeholder="Paste Instagram video link" required>
-                    <select id="video-quality">
-                        <option value="auto">Auto (Recommended)</option>
-                        <option value="standard">Standard Quality</option>
-                        <option value="hd">HD Quality</option>
-                        <option value="4k">Ultra HD 4K</option>
-                    </select>
-                    <button type="submit" class="download-btn">Download Video</button>
-                </form>
-                <div class="loader" id="video-loader"></div>
-                <div id="video-results" class="download-results"></div>
-            </div>
-        </div>
-    </section>
+    <script>
+        const translations = {
+            en: {
+                title: "Instagram Downloader",
+                subtitle: "Download Instagram videos, reels, stories and photos in HD quality",
+                urlLabel: "Instagram URL",
+                urlPlaceholder: "https://www.instagram.com/...",
+                downloadBtn: "Download",
+                downloadingBtn: "Downloading...",
+                features: {
+                    video: {
+                        title: "Video Download",
+                        desc: "Download Instagram videos in HD quality"
+                    },
+                    reels: {
+                        title: "Reels Download",
+                        desc: "Save Instagram Reels to your device"
+                    },
+                    story: {
+                        title: "Story Download",
+                        desc: "Download Instagram Stories before they expire"
+                    }
+                }
+            },
+            zh: {
+                title: "Instagram下载器",
+                subtitle: "下载高清Instagram视频、短视频、故事和图片",
+                urlLabel: "Instagram链接",
+                urlPlaceholder: "https://www.instagram.com/...",
+                downloadBtn: "下载",
+                downloadingBtn: "下载中...",
+                features: {
+                    video: {
+                        title: "视频下载",
+                        desc: "下载高清Instagram视频"
+                    },
+                    reels: {
+                        title: "短视频下载",
+                        desc: "保存Instagram短视频到设备"
+                    },
+                    story: {
+                        title: "故事下载",
+                        desc: "在Instagram故事过期前下载"
+                    }
+                }
+            }
+        };
 
-    <section id="reels" class="download-section">
-        <div class="container">
-            <h2>Instagram Reels Download</h2>
-            <p>Download all Reels short videos, supports HD format</p>
-            <div class="download-form-container">
-                <form id="reels-form" class="download-form">
-                    <input type="text" id="reels-url" placeholder="Paste Instagram Reels link" required>
-                    <button type="submit" class="download-btn">Download Reels</button>
-                </form>
-                <div class="loader" id="reels-loader"></div>
-                <div id="reels-results" class="download-results"></div>
-            </div>
-        </div>
-    </section>
+        let currentLang = 'en';
 
-    <section id="story" class="download-section">
-        <div class="container">
-            <h2>Instagram Stories Download</h2>
-            <p>Download Instagram Stories, save them before they expire</p>
-            <div class="download-form-container">
-                <form id="story-form" class="download-form">
-                    <input type="text" id="story-url" placeholder="Paste Instagram Stories link or username" required>
-                    <button type="submit" class="download-btn">Download Stories</button>
-                </form>
-                <div class="loader" id="story-loader"></div>
-                <div id="story-results" class="download-results"></div>
-            </div>
-        </div>
-    </section>
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateLanguage();
+        }
 
-    <section id="photo" class="download-section">
-        <div class="container">
-            <h2>Instagram Photo Download</h2>
-            <p>Download Instagram photos, save original high-quality images</p>
-            <div class="download-form-container">
-                <form id="photo-form" class="download-form">
-                    <input type="text" id="photo-url" placeholder="Paste Instagram photo link" required>
-                    <button type="submit" class="download-btn">Download Photo</button>
-                </form>
-                <div class="loader" id="photo-loader"></div>
-                <div id="photo-results" class="download-results"></div>
-            </div>
-        </div>
-    </section>
+        function updateLanguage() {
+            const t = translations[currentLang];
+            document.querySelector('h1').textContent = t.title;
+            document.querySelector('.header p').textContent = t.subtitle;
+            document.querySelector('label').textContent = t.urlLabel;
+            document.querySelector('input').placeholder = t.urlPlaceholder;
+            document.querySelector('.btn').textContent = t.downloadBtn;
+            
+            const features = document.querySelectorAll('.feature-card');
+            features[0].querySelector('h3').textContent = t.features.video.title;
+            features[0].querySelector('p').textContent = t.features.video.desc;
+            features[1].querySelector('h3').textContent = t.features.reels.title;
+            features[1].querySelector('p').textContent = t.features.reels.desc;
+            features[2].querySelector('h3').textContent = t.features.story.title;
+            features[2].querySelector('p').textContent = t.features.story.desc;
+        }
 
-    <section id="audio" class="download-section">
-        <div class="container">
-            <h2>Instagram Audio Download</h2>
-            <p>Extract and download audio from Instagram videos</p>
-            <div class="download-form-container">
-                <form id="audio-form" class="download-form">
-                    <input type="text" id="audio-url" placeholder="Paste Instagram video link" required>
-                    <select id="audio-format">
-                        <option value="mp3">MP3</option>
-                        <option value="m4a">M4A</option>
-                    </select>
-                    <button type="submit" class="download-btn">Download Audio</button>
-                </form>
-                <div class="loader" id="audio-loader"></div>
-                <div id="audio-results" class="download-results"></div>
-            </div>
-        </div>
-    </section>
+        document.getElementById('downloadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('url').value;
+            const btn = document.getElementById('downloadBtn');
+            
+            if (!url.includes('instagram.com')) {
+                alert(currentLang === 'en' ? 'Please enter a valid Instagram URL' : '请输入有效的Instagram链接');
+                return;
+            }
 
-    <section id="private" class="download-section">
-        <div class="container">
-            <h2>Instagram Private Content Download</h2>
-            <p>Download content from private accounts (authorization required)</p>
-            <div class="download-form-container">
-                <form id="private-form" class="download-form">
-                    <input type="text" id="private-url" placeholder="Paste private Instagram content link" required>
-                    <div class="auth-fields">
-                        <input type="text" id="private-username" placeholder="Your Instagram username" required>
-                        <input type="password" id="private-password" placeholder="Your Instagram password" required>
-                    </div>
-                    <p class="disclaimer">* We don't save your login information, only used for API authorization</p>
-                    <button type="submit" class="download-btn">Download Private Content</button>
-                </form>
-                <div class="loader" id="private-loader"></div>
-                <div id="private-results" class="download-results"></div>
-            </div>
-        </div>
-    </section>
+            btn.disabled = true;
+            btn.textContent = translations[currentLang].downloadingBtn;
 
-    <section id="batch" class="download-section">
-        <div class="container">
-            <h2>Instagram Batch Download</h2>
-            <p>Download multiple Instagram content at once</p>
-            <div class="download-form-container">
-                <form id="batch-form" class="download-form">
-                    <textarea id="batch-urls" placeholder="Paste one Instagram link per line..." rows="5" required></textarea>
-                    <button type="submit" class="download-btn">Batch Download</button>
-                </form>
-                <div class="loader" id="batch-loader"></div>
-                <div id="batch-results" class="download-results"></div>
-            </div>
-        </div>
-    </section>
+            try {
+                // 根据环境使用不同的API地址
+                const apiUrl = window.location.hostname === 'localhost' 
+                    ? 'http://localhost:3000/api/download'
+                    : '/api/download';
 
-    <section class="how-to">
-        <div class="container">
-            <h2>How to Use Instagram Downloader</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Copy Link</h3>
-                    <p>On Instagram, click the "..." in the top right of a post, then select "Copy Link"</p>
-                    <img src="img/copy-link.png" alt="Copy Instagram Link">
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Paste Link</h3>
-                    <p>Paste the copied link into the input box on our website</p>
-                    <img src="img/paste-link.png" alt="Paste Instagram Link">
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Download Content</h3>
-                    <p>Click the download button, wait for processing, then click the download link</p>
-                    <img src="img/download.png" alt="Download Instagram Content">
-                </div>
-            </div>
-        </div>
-    </section>
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url }),
+                });
 
-    <section class="faq">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <div class="accordion">
-                <div class="accordion-item">
-                    <button class="accordion-header">What is an Instagram Downloader?</button>
-                    <div class="accordion-content">
-                        <p>An Instagram downloader is an online tool that allows you to download photos, videos, Reels, and Stories from Instagram. FastDL.space is a powerful Instagram content download tool that supports various types of Instagram content downloads.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Do I need to log in to my Instagram account?</button>
-                    <div class="accordion-content">
-                        <p>For public content, you don't need to log in to your Instagram account. FastDL.space doesn't require you to provide any personal information, ensuring you can download content safely and anonymously. Login is only required when downloading private account content.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Can I save videos directly from Instagram?</button>
-                    <div class="accordion-content">
-                        <p>Yes, FastDL.space enables you to download videos. Just visit our website: fastdl.space and follow the instructions.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Is this Instagram video and photo download service free?</button>
-                    <div class="accordion-content">
-                        <p>Yes, this service is completely free with no download limits.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Can I download content from private Instagram accounts?</button>
-                    <div class="accordion-content">
-                        <p>Yes, but you need to provide Instagram authorization to download private content. We don't save your account information, it's only used for API authorization.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Can I save Stories from Instagram?</button>
-                    <div class="accordion-content">
-                        <p>Yes, you can view and download Instagram Stories. Click on the ⋮ on the story, select "Copy Link," and then paste the link into FastDL.space to download it.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">Where are the downloaded videos saved?</button>
-                    <div class="accordion-content">
-                        <p>Usually, videos are saved in the "Downloads" folder on your device. You can also right-click on the download link and select "Save As..." to choose the save location.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                if (!response.ok) throw new Error('Download failed');
 
-    <footer>
-        <div class="container">
-            <div class="footer-columns">
-                <div class="footer-column">
-                    <h3>FastDL.space</h3>
-                    <p>The fastest Instagram content downloader, supporting video, photo, Reels, Stories, audio, and private content downloads.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Tools</h3>
-                    <ul>
-                        <li><a href="#video">Instagram Video Download</a></li>
-                        <li><a href="#reels">Instagram Reels Download</a></li>
-                        <li><a href="#story">Instagram Stories Download</a></li>
-                        <li><a href="#photo">Instagram Photo Download</a></li>
-                        <li><a href="#audio">Instagram Audio Download</a></li>
-                        <li><a href="#private">Instagram Private Content Download</a></li>
-                        <li><a href="#batch">Instagram Batch Download</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul>
-                        <li><a href="/contact">Contact Us</a></li>
-                        <li><a href="/faq">FAQ</a></li>
-                        <li><a href="/help">Help Center</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="/terms">Terms of Service</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-disclaimer">
-                <p>We are not affiliated with Instagram or Meta.</p>
-                <p>© 2023 FastDL.space. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="/js/script.js"></script>
+                const data = await response.json();
+                
+                if (data.url) {
+                    // 创建一个临时链接来下载文件
+                    const a = document.createElement('a');
+                    a.href = data.url;
+                    a.download = `instagram-${data.type}-${Date.now()}.${data.type === 'video' ? 'mp4' : 'jpg'}`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                } else {
+                    throw new Error('No download URL found');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert(currentLang === 'en' ? 'Failed to download content' : '下载失败');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = translations[currentLang].downloadBtn;
+            }
+        });
+    </script>
 </body>
 </html> 
